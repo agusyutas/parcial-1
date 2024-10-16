@@ -1,0 +1,40 @@
+[
+    {
+        "nombre": "YHLQMDLG",
+        "autor": "Bad Bunny",
+        "codigo": 54,
+        "pistas": [
+            {
+                "nombre": "La Dificil",
+                "duracion": 244
+            },
+            {
+                "nombre": "La Zona",
+                "duracion": 317
+            },
+            {
+                "nombre": "Pero ya no",
+                "duracion": 241
+            }
+        ]
+    },
+    {
+        "nombre": "X 100pre",
+        "autor": "Bad Bunny",
+        "codigo": 55,
+        "pistas": [
+            {
+                "nombre": "200 MPH",
+                "duracion": 251
+            },
+            {
+                "nombre": "Caro",
+                "duracion": 350
+            },
+            {
+                "nombre": "Mia",
+                "duracion": 331
+            }
+        ]
+    }
+]

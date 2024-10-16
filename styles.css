@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #26262c;
+    text-align: center;
+}
+
+header {
+    background-color: #16161ac1;
+}
+
+h2 {
+    font-size: 1.5em;
+    border-top: 2px solid #ffffff;
+    padding-top: 1em;
+}
+
+h1,h2,button {
+    color: #fffffe;
+    font-weight: bold;
+}
+
+p {
+    color: #d7d9de;
+    font-size: 1.2em;
+}
+
+button {
+    padding: 1.2rem 2rem;
+    border: none;
+    background-color: #338dc5;
+    margin: 0.3em;
+    transition: color 0.32s ease-in;
+}
+
+span, .negrita{
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #fffffe;
+    color: black;
+}
+
+.disco {
+    background-color: #173e57;
+    border-radius: 2em;
+}
+
+img {
+    width: 50%;
+}
+
+.rojo {
+    color: red;
+}
+
+main button:hover {
+    opacity: .8;
+}
+
+/*FOOTER*/
+ footer {
+     width: 100%;
+     padding: 2em;
+     background-color: #6c6c6cc1;
+ }
+ 
+ footer ul {
+     display: flex;
+     justify-content: center;
+     width: 100%;
+     list-style: none;
+ }
+ 
+ footer ul li {
+     font-family: 'Montserrat';
+     font-size: 1.4em;
+     padding: 1rem;
+     text-align: center;
+ }
+ 
+ footer ul li a {
+     font-family: 'Montserrat';
+     font-size: 1em;
+     text-decoration: none;
+     color: #D0E0E3;
+ }
+ 
+ footer ul li a:hover {
+     color: #a2c4c9;
+ }
+ 
+
+
+ 
