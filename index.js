@@ -98,6 +98,7 @@ function cargar() {
     } while (!validarCodigo(codigo));
 
     let nuevoDisco = new Disco(nombre, autor, codigo);
+     
 
     let continuar;
     do {
