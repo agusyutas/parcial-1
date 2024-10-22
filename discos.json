@@ -3,14 +3,15 @@
         "nombre": "YHLQMDLG",
         "autor": "Bad Bunny",
         "codigo": 54,
+        "portada": "https://www.lahiguera.net/musicalia/artistas/bad_bunny/disco/10439/bad_bunny_yhlqmdlg-portada.jpg",
         "pistas": [
             {
                 "nombre": "La Dificil",
-                "duracion": 244
+                "duracion": 146
             },
             {
                 "nombre": "La Zona",
-                "duracion": 317
+                "duracion": 130
             },
             {
                 "nombre": "Pero ya no",
@@ -22,14 +23,15 @@
         "nombre": "X 100pre",
         "autor": "Bad Bunny",
         "codigo": 55,
+        "portada":"https://www.lahiguera.net/musicalia/artistas/bad_bunny/disco/9592/bad_bunny_x100pre-portada.jpg",
         "pistas": [
             {
                 "nombre": "200 MPH",
-                "duracion": 251
+                "duracion": 150
             },
             {
                 "nombre": "Caro",
-                "duracion": 350
+                "duracion": 182
             },
             {
                 "nombre": "Mia",

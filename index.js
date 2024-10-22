@@ -13,10 +13,11 @@ class Pista {
 }
 
 class Disco {
-    constructor(nombre, autor, codigo) {
+    constructor(nombre, autor, codigo, portada) {
         this.nombre = nombre;
         this.autor = autor;
         this.codigo = codigo;
+        this.portada = portada;
         this.pistas = [];
     }
 
@@ -80,6 +81,15 @@ function validarDuracion(duracion) {
     return true;
 }
 
+function validarURL(url) {
+    const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
+    if (!regex.test(url)) {
+        alert("ERROR - La URL ingresada no es válida o no es un enlace a una portada.");
+        return false;
+    }
+    return true;
+}
+
 // Funcion para Cargar un nuevo disco
 function cargar() {
     let nombre;
@@ -97,7 +107,12 @@ function cargar() {
         codigo = parseInt(prompt("Ingrese el codigo del disco (entre 1 y 999):"));
     } while (!validarCodigo(codigo));
 
-    let nuevoDisco = new Disco(nombre, autor, codigo);
+    let portada;
+    do {
+        portada = prompt("Ingrese el enlace de la portada del disco:");
+    } while (!validarURL(portada));
+
+    let nuevoDisco = new Disco(nombre, autor, codigo, portada);
      
 
     let continuar;
@@ -184,8 +199,24 @@ function obtenerPistaMasLarga(pistas) {
     return pistaMasLarga;
 }
 
+// Función para convertir segundos a formato HH:MM:SS o MM:SS
+function convertirDuracion(segundosTotales) {
+    const fecha = new Date(segundosTotales * 1000); // Convertir segundos a milisegundos
 
-// Funcion para Mostrar
+    let hh = fecha.getUTCHours().toString();
+    let mm = fecha.getUTCMinutes().toString();
+    let ss = fecha.getUTCSeconds().toString();
+
+    // Agregar el cero a la izquierda si es necesario
+    hh = hh < 10 ? "0" + hh : hh;
+    mm = mm < 10 ? "0" + mm : mm;
+    ss = ss < 10 ? "0" + ss : ss;
+
+    // Si las horas son "00", omitimos mostrarlas
+    return hh === "00" ? `${mm}:${ss}` : `${hh}:${mm}:${ss}`;
+}
+
+// Función para Mostrar
 function mostrar() {
     let discosHTML = '';
     nPista = 1;
@@ -196,7 +227,7 @@ function mostrar() {
 
     discosHTML += `<div class="row justify-content-center">
                         <p class="negrita">Cantidad discos: <span class="rojo">${cantidadDiscos}</span></p>
-                        <p class="negrita">El disco con duración total más alta es: <span class="rojo">${discoDuracionMaxima.nombre}</span> con <span class="rojo">${duracionMasAltaTotal}</span> segundos</p>`;
+                        <p class="negrita">El disco con duración total más alta es: <span class="rojo">${discoDuracionMaxima.nombre}</span> con <span class="rojo">${convertirDuracion(duracionMasAltaTotal)}</span></p>`;
 
     for (let disco of discos) {
         duracionTotal = duracionDiscoTotal(disco.pistas);
@@ -204,33 +235,33 @@ function mostrar() {
         pistaMasLarga = obtenerPistaMasLarga(disco.pistas);
 
         discosHTML += `<div class="disco p-3 m-4 col-lg-3">
-                            <img alt="disco" src="./img/disco.png">
+                            <img alt="disco" src="${disco.portada}">
                             <h2>${disco.nombre}</h2>
                             <p><span>Autor:</span> ${disco.autor}</p>
                             <p><span>Codigo:</span> ${disco.codigo}</p>
                             <p><span>N° Pistas:</span> ${cantidadPistas}</p>`;
 
         disco.pistas.forEach(pista => {
-            if (pista.duracion > 300) {
-                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span class="rojo">${pista.duracion}</span> segundos</p>`;
+            let duracionFormateada = convertirDuracion(pista.duracion);
+            if (pista.duracion > 180) {
+                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span class="rojo">${duracionFormateada}</span></p>`;
             } else {
-                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span>${pista.duracion}</span> segundos</p>`;
+                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span>${duracionFormateada}</span></p>`;
             }
             nPista++;
         });
 
-        discosHTML += ` <p><span>Pista con mayor duracion:</span> ${pistaMasLarga.nombre} (${pistaMasLarga.duracion} segundos)</p>
-                        <p><span>Duracion total:</span> ${duracionTotal} segundos</p>
-                        <p><span>Duracion promedio:</span> ${duracionPromedio} segundos</p>
+        discosHTML += ` <p><span>Pista con mayor duracion:</span> ${pistaMasLarga.nombre} (${convertirDuracion(pistaMasLarga.duracion)})</p>
+                        <p><span>Duracion total:</span> ${convertirDuracion(duracionTotal)}</p>
+                        <p><span>Duracion promedio:</span> ${convertirDuracion(duracionPromedio)}</p>
                     </div> `;
         nPista = 1;
     }
-    discosHTML += `</div>`
+    discosHTML += `</div>`;
     document.getElementById('discos').innerHTML = discosHTML;
 }
 
-
-// Funcion para Mostrar por codigo
+// Función para Mostrar por código
 function mostrarPorCodigo() {
     let codigo = parseInt(prompt("Ingrese el codigo del disco que desea mostrar:"));
     let disco = discos.find(disco => disco.codigo === codigo);
@@ -242,25 +273,26 @@ function mostrarPorCodigo() {
 
         discosHTML += `<div class="row justify-content-center">`
         discosHTML += `<div class="disco p-3 m-4 col-lg-3">
-                            <img alt="disco" src="./img/disco.png">
+                            <img alt="disco" src="${disco.portada}">
                             <h2>${disco.nombre}</h2>
                             <p><span>Autor:</span> ${disco.autor}</p>
                             <p><span>Codigo:</span> ${disco.codigo}</p>
                             <p><span>N° Pistas:</span> ${cantidadPistas}</p>
-                            <p><span>Pista con mayor duracion:</span> ${pistaMasLarga.nombre} (${pistaMasLarga.duracion} segundos)</p>`;
+                            <p><span>Pista con mayor duracion:</span> ${pistaMasLarga.nombre} (${convertirDuracion(pistaMasLarga.duracion)})</p>`;
 
         disco.pistas.forEach(pista => {
-            if (pista.duracion > 300) {
-                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span class="rojo">${pista.duracion}</span> segundos</p>`;
+            let duracionFormateada = convertirDuracion(pista.duracion);
+            if (pista.duracion > 180) {
+                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span class="rojo">${duracionFormateada}</span></p>`;
             } else {
-                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span>${pista.duracion}</span> segundos</p>`;
+                discosHTML += `<p><span>${nPista}°:</span> ${pista.nombre} - <span>${duracionFormateada}</span></p>`;
             }
             nPista++;
         });
 
-        discosHTML += ` <p><span>Pista con mayor duracion:</span> ${pistaMasLarga.nombre} (${pistaMasLarga.duracion} segundos)</p>
-                        <p><span>Duracion total:</span> ${duracionTotal} segundos</p>
-                        <p><span>Duracion promedio:</span> ${duracionPromedio} segundos</p>
+        discosHTML += ` <p><span>Pista con mayor duracion:</span> ${pistaMasLarga.nombre} (${convertirDuracion(pistaMasLarga.duracion)})</p>
+                        <p><span>Duracion total:</span> ${convertirDuracion(duracionTotal)}</p>
+                        <p><span>Duracion promedio:</span> ${convertirDuracion(duracionPromedio)}</p>
                         </div>`;
         nPista = 1;
         discosHTML += `</div>`;
@@ -287,5 +319,4 @@ function cargarDiscosDesdeJSON() {
 }
 
 document.getElementById('mostrarDiscos').addEventListener('click', cargarDiscosDesdeJSON);
-
 
