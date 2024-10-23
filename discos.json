@@ -74,8 +74,8 @@
     },
     {
         "nombre": "folklore",
-        "artista": "Taylor Swift",
-        "id": 111,
+        "autor": "Taylor Swift",
+        "codigo": 111,
         "portada": "https://i.scdn.co/image/ab67616d0000b27395f754318336a07e85ec59bc",
         "pistas": [
             {
