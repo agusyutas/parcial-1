@@ -82,7 +82,7 @@ function validarDuracion(duracion) {
 }
 
 function validarURL(url) {
-    const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
+    const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif)|https?:\/\/.*\/image\/.*)/i; 
     if (!regex.test(url)) {
         alert("ERROR - La URL ingresada no es válida o no es un enlace a una portada.");
         return false;
