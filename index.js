@@ -201,7 +201,7 @@ function obtenerPistaMasLarga(pistas) {
 
 // Función para convertir segundos a formato HH:MM:SS o MM:SS
 function convertirDuracion(segundosTotales) {
-    const fecha = new Date(segundosTotales * 1000); // Convertir segundos a milisegundos
+    const fecha = new Date(segundosTotales * 1000);
 
     let hh = fecha.getUTCHours().toString();
     let mm = fecha.getUTCMinutes().toString();
